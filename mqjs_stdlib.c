@@ -326,6 +326,7 @@ static const JSPropDef js_performance[] = {
 static const JSClassDef js_performance_obj =
     JS_OBJECT_DEF("Performance", js_performance);
 
+#ifndef MQJS_STDLIB_MINIMAL
 static const JSPropDef js_global_object[] = {
     JS_PROP_CLASS_DEF("Object", &js_object_class),
     JS_PROP_CLASS_DEF("Function", &js_function_class),
@@ -384,6 +385,12 @@ static const JSPropDef js_global_object[] = {
 #endif
     JS_PROP_END,
 };
+#else
+static const JSPropDef js_global_object[] = {
+    JS_PROP_CLASS_DEF("console", &js_console_obj),
+    JS_PROP_END,
+};
+#endif
 
 /* Additional C function declarations (only useful for C
    closures). They are always defined first. */
